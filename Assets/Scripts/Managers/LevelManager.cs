@@ -126,7 +126,7 @@ public class LevelManager : Manager<LevelManager>
         Vector3 scale = LastBlock.transform.localScale;
 
         Vector3 pos = LastBlock.transform.position
-            + Vector3.up* LastBlock.transform.localScale.y;
+            + Vector3.up * LastBlock.transform.localScale.y;
 
         if (axisRandom == 1)
         {
