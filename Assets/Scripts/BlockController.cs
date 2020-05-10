@@ -50,9 +50,7 @@ public class BlockController : MonoBehaviour, IPointerClickHandler
 
             if (LevelManager.Instance.CurrentAxis == LevelManager.Axis.X)
             {
-                float dx = LevelManager.Instance.LastBlock.transform.position.x
-                    - transform.position.x;
-
+                float dx = lastBlock.transform.position.x - transform.position.x;
                 if (transform.localScale.x - Mathf.Abs(dx) > 0)
                 {
                     SplitBlock(dx, transform.localScale.x);
