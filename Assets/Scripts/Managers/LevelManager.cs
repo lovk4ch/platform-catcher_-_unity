@@ -104,7 +104,7 @@ public class LevelManager : Manager<LevelManager>
         blocksTopPosition = Vector3.zero;
         Gimbal.Instance.LookReset();
 
-        GetBlock(blockPrefab.transform.localScale);
+        GetBlock();
     }
 
     public void GameOver()
@@ -113,7 +113,7 @@ public class LevelManager : Manager<LevelManager>
         Gimbal.Instance.LookToTower();
     }
 
-    private void GetBlock(Vector3 scale1)
+    private void GetBlock()
     {
         blocksTopPosition += Vector3.up * blockPrefab.transform.localScale.y;
 
@@ -123,36 +123,30 @@ public class LevelManager : Manager<LevelManager>
 
         float axisRandom = Random.Range(1, 3);
 
-        Axis previousAxis = CurrentAxis;
-
         Vector3 shift;
         if (axisRandom == 1)
         {
             CurrentAxis = Axis.X;
-            shift = Vector3.right * direction * 6;
+            shift = Vector3.right * direction * PlatformMovingInterval;
         }
         else
         {
             CurrentAxis = Axis.Z;
-            shift = Vector3.forward * direction * 6;
+            shift = Vector3.forward * direction * PlatformMovingInterval;
         }
 
-        Vector3 pos = blocksTopPosition + shift;
+        Vector3 pos = blocksTopPosition + shift + new Vector3(
+            LastBlock.transform.position.x,
+            0,
+            LastBlock.transform.position.z
+        );
+
         Vector3 scale = LastBlock.transform.localScale;
-        Gimbal.Instance.LookPosition = blocksTopPosition;
-
-        // if (CurrentAxis != previousAxis)
-        {
-            pos += new Vector3(
-                LastBlock.transform.position.x,
-                0,
-                LastBlock.transform.position.z
-            );
-        }
 
         BlockController block = Instantiate(blockPrefab, pos, Quaternion.identity);
         block.transform.localScale = scale;
         block.direction = -direction;
+        Gimbal.Instance.LookPosition = blocksTopPosition;
     }
 
     public void Split(BlockController block, Vector3 position, float scale)
@@ -170,7 +164,7 @@ public class LevelManager : Manager<LevelManager>
         AudioManager.Instance.Play("Set");
         Blocks.Add(block);
 
-        GetBlock(block.transform.position);
+        GetBlock();
         OnChange.Invoke();
     }
 }

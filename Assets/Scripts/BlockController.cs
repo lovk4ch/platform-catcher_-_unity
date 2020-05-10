@@ -99,15 +99,18 @@ public class BlockController : MonoBehaviour, IPointerClickHandler
     {
         if (LevelManager.Instance.CurrentAxis == LevelManager.Axis.X)
         {
-            if (transform.position.x > LevelManager.Instance.PlatformMovingInterval
-                || transform.position.x < -LevelManager.Instance.PlatformMovingInterval)
-                direction *= -1;
+            if (transform.position.x > LevelManager.Instance.PlatformMovingInterval)
+                direction = -1;
+            else if (transform.position.x < -LevelManager.Instance.PlatformMovingInterval)
+                direction = 1;
+
         }
         else
         {
-            if (transform.position.z > LevelManager.Instance.PlatformMovingInterval
-                || transform.position.z < -LevelManager.Instance.PlatformMovingInterval)
-                direction *= -1;
+            if (transform.position.z > LevelManager.Instance.PlatformMovingInterval)
+                direction = -1;
+            else if (transform.position.z < -LevelManager.Instance.PlatformMovingInterval)
+                direction = 1;
         }
 
         if (transform.position.y < -100)
