@@ -135,13 +135,11 @@ public class LevelManager : Manager<LevelManager>
             shift = Vector3.forward * direction * PlatformMovingInterval;
         }
 
-        Vector3 pos = blocksTopPosition + shift + new Vector3(
-            LastBlock.transform.position.x,
-            0,
-            LastBlock.transform.position.z
-        );
-
         Vector3 scale = LastBlock.transform.localScale;
+
+        Vector3 pos = LastBlock.transform.position
+            + Vector3.up * LastBlock.transform.localScale.y
+            + shift;
 
         BlockController block = Instantiate(blockPrefab, pos, Quaternion.identity);
         block.transform.localScale = scale;
