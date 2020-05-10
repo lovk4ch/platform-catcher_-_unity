@@ -36,7 +36,6 @@ public class UIManager : Manager<UIManager>
     private void Restart()
     {
         RestartEnabled = false;
-        scoreText.text = "Score: " + 0;
 
         if (score > highscore)
         {
@@ -45,5 +44,6 @@ public class UIManager : Manager<UIManager>
         }
 
         LevelManager.Instance.Restart();
+        UpdateUI();
     }
 }

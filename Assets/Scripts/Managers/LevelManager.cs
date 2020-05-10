@@ -17,8 +17,8 @@ public class LevelManager : Manager<LevelManager>
     [Range(15, 150)]
     private int gradientCycleCount = 30;
     [SerializeField]
-    [Range(10, 30)]
-    private int platformMovingInterval = 11;
+    [Range(5, 15)]
+    private int platformMovingInterval = 10;
 
     [SerializeField]
     private BlockController blockPrefab = null;
@@ -70,6 +70,7 @@ public class LevelManager : Manager<LevelManager>
             }
         }
     }
+
     public List<BlockController> Blocks { get; set; }
 
     #endregion
@@ -121,14 +122,11 @@ public class LevelManager : Manager<LevelManager>
         if (direction != 1)
             direction = -1;
 
-        float axisRandom = Random.Range(1, 3);
-
-        Vector3 scale = LastBlock.transform.localScale;
-
         Vector3 pos = LastBlock.transform.position
             + Vector3.up * LastBlock.transform.localScale.y;
 
-        if (axisRandom == 1)
+        // Random axis
+        if (Random.Range(1, 3) == 1)
         {
             CurrentAxis = Axis.X;
             pos += Vector3.right * direction * PlatformMovingInterval;
@@ -140,7 +138,7 @@ public class LevelManager : Manager<LevelManager>
         }
 
         BlockController block = Instantiate(blockPrefab, pos, Quaternion.identity);
-        block.transform.localScale = scale;
+        block.transform.localScale = LastBlock.transform.localScale;
         block.direction = -direction;
         Gimbal.Instance.LookPosition = blocksTopPosition;
     }
