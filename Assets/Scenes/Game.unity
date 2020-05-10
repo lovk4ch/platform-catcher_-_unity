@@ -276,7 +276,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 116067642}
-  m_Mesh: {fileID: 1807315141}
+  m_Mesh: {fileID: 1729935012}
 --- !u!1 &163645101
 GameObject:
   m_ObjectHideFlags: 0
@@ -548,7 +548,7 @@ MonoBehaviour:
   midColor: {r: 0.495283, g: 1, b: 0.495283, a: 1}
   endColor: {r: 0.495283, g: 0.495283, b: 1, a: 1}
   gradientCycleCount: 30
-  platformMovingInterval: 10
+  platformMovingInterval: 5
   blockPrefab: {fileID: 3471500427665876366, guid: d2c31e3dcf1de3f498d79ca867f1959c,
     type: 3}
   CurrentAxis: 0
@@ -1021,7 +1021,7 @@ MonoBehaviour:
   highscoreText: {fileID: 770429064}
   scoreText: {fileID: 2131952585}
   restart: {fileID: 1847513728}
---- !u!43 &1807315141
+--- !u!43 &1729935012
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

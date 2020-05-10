@@ -37,15 +37,7 @@ public class Gimbal : Manager<Gimbal>
 
     private void LateUpdate()
     {
-        float delta = Time.deltaTime;
-
-        float change = InputManager.Instance.GetWheel();
-        if (change != 0 && smoothScale.z + change <= -5 && smoothScale.z + change >= -60)
-        {
-            smoothScale += new Vector3(0, 0, change);
-        }
-        cameraHolder.localPosition = Vector3.Lerp(cameraHolder.localPosition, smoothScale, m_speed * delta);
-
-        transform.position = Vector3.Lerp(transform.position, LookPosition, m_speed * delta);
+        cameraHolder.localPosition = Vector3.Lerp(cameraHolder.localPosition, smoothScale, m_speed * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, LookPosition, m_speed * Time.deltaTime);
     }
 }
