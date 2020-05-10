@@ -123,23 +123,21 @@ public class LevelManager : Manager<LevelManager>
 
         float axisRandom = Random.Range(1, 3);
 
-        Vector3 shift;
+        Vector3 scale = LastBlock.transform.localScale;
+
+        Vector3 pos = LastBlock.transform.position
+            + Vector3.up* LastBlock.transform.localScale.y;
+
         if (axisRandom == 1)
         {
             CurrentAxis = Axis.X;
-            shift = Vector3.right * direction * PlatformMovingInterval;
+            pos += Vector3.right * direction * PlatformMovingInterval;
         }
         else
         {
             CurrentAxis = Axis.Z;
-            shift = Vector3.forward * direction * PlatformMovingInterval;
+            pos += Vector3.forward * direction * PlatformMovingInterval;
         }
-
-        Vector3 scale = LastBlock.transform.localScale;
-
-        Vector3 pos = LastBlock.transform.position
-            + Vector3.up * LastBlock.transform.localScale.y
-            + shift;
 
         BlockController block = Instantiate(blockPrefab, pos, Quaternion.identity);
         block.transform.localScale = scale;
